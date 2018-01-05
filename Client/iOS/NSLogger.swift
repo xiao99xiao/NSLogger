@@ -107,7 +107,9 @@ public final class Logger {
             let bitmapRep = NSBitmapImageRep(data: tiff) else { return nil }
 
           let imageData: Data?
-          #if swift(>=3)
+          #if swift(>=4)
+              imageData = bitmapRep.representation(using: .png, properties: [:])
+          #elseif swift(>=3)
             imageData = bitmapRep.representation(using: .PNG, properties: [:])
           #else
             imageData = bitmapRep.representation(using: NSPNGFileType, properties: [:])
